@@ -13,4 +13,5 @@ const links = text
 
 export default {
   findBySlug: (slug) => links.find((link) => link.slug == slug),
+  getAll: () => links,
 };
