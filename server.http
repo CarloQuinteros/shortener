@@ -9,3 +9,12 @@ GET  {{base}}/pyspark
 
 ### /api/links
 GET {{base}}/api/links
+
+### Crear link
+POST {{base}}/api/links
+Content-Type: application/json
+
+{
+    "slug":"java",
+    "url":"https://academia.holamundo.io/courses/ultimate-javascript"
+}
