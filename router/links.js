@@ -20,6 +20,13 @@ router.post("/", validate(createSchema), async (req, res) => {
   res.status(201).json(link);
 });
 // router.put("/",(req,res)=>{})
-// router.delete("/",(req,res)=>{})
+router.delete("/:id", async (req, res) => {
+  if (!store.findById(req.params.id)) {
+    const error = new Error("El Link no  existe");
+    throw Object.assign(error, { status: 404 });
+  }
+  await store.deleteById(req.params.id);
+  res.status(204).end();
+});
 
 export default router;
