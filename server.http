@@ -18,3 +18,6 @@ Content-Type: application/json
     "slug":"java",
     "url":"https://academia.holamundo.io/courses/ultimate-javascript"
 }
+
+### Delete by ID
+DELETE {{base}}/api/links/4

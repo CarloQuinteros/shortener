@@ -23,6 +23,7 @@ const save = () => {
 
 export default {
   findBySlug: (slug) => links.find((link) => link.slug == slug),
+  findById: (id) => links.find((link) => link.id == id),
   getAll: () => links,
   create: async ({ slug, url }) => {
     const link = { id: String(nextId++), slug, url };
@@ -30,5 +31,11 @@ export default {
     await save();
 
     return link;
+  },
+  deleteById: async (id) => {
+    const index = links.findIndex((link) => link.id === id);
+    if (index < 0) return;
+    links.splice(index, 1);
+    await save();
   },
 };
