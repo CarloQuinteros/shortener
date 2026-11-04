@@ -21,3 +21,13 @@ Content-Type: application/json
 
 ### Delete by ID
 DELETE {{base}}/api/links/4
+
+### Update a link
+PUT {{base}}/api/links/5
+Content-Type: application/json
+
+{
+    "id":"4",
+    "slug":"javacito",
+    "url":"https://academia.holamundo.io/courses/ultimate-javascript"
+}

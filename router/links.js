@@ -1,6 +1,7 @@
 import { Router } from "express";
 import store from "../store.js";
 import { validate } from "../middlewares/validate.js";
+import { sameId } from "../middlewares/sameId.js";
 import { createSchema, updateSchema } from "../schemas/links.js";
 
 const router = Router();
@@ -19,7 +20,21 @@ router.post("/", validate(createSchema), async (req, res) => {
   const link = await store.create(req.body);
   res.status(201).json(link);
 });
-// router.put("/",(req,res)=>{})
+
+router.put("/:id", validate(updateSchema), sameId, async (req, res) => {
+  const current = store.findById(req.params.id);
+  if (!current) {
+    const error = new Error("El Link no  existe");
+    throw Object.assign(error, { status: 404 });
+  }
+
+  if (store.findBySlug(req.body.slug)) {
+    const error = new Error("El Slug  ya  existe");
+    throw Object.assign(error, { status: 409 });
+  }
+  const link = await store.update(req.body);
+  res.json(link);
+});
 router.delete("/:id", async (req, res) => {
   if (!store.findById(req.params.id)) {
     const error = new Error("El Link no  existe");

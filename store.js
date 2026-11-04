@@ -38,4 +38,12 @@ export default {
     links.splice(index, 1);
     await save();
   },
+  update: async (newLink) => {
+    const link = links.find((link) => link.id == newLink.id);
+    if (link) {
+      Object.assign(link, newLink);
+      await save();
+    }
+    return link;
+  },
 };
